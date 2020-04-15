@@ -22,7 +22,7 @@ const ssocket = socketIo(https)
 
 Rapp.reg(app)
 
-app.get('/', () => { console.log(1) })
+app.get('/', (_req, res) => res.redirect('/main'))
 
 readdir(path + '/router', (err, routers) => {
   if (err) console.log(err)
@@ -30,14 +30,15 @@ readdir(path + '/router', (err, routers) => {
     if (!existsSync(path + '/router/' + router + '/index.js')) return
     router = require(path + '/router/' + router + '/index')
 
+    if (router.static) app.use(router._root + router.static, express.static(path + '/router/' + router._root + router.static))
     if (router._cors) app.use(router._root, cors())
-    if (router._parse) {
-      router._parse.forEach((p) => {
+    if (router._parser) {
+      router._parser.forEach((p) => {
         switch (p) {
-          case 'raw': app.use(router._root, express.raw()); break
-          case 'json': app.use(router._root, express.json()); break
-          case 'text': app.use(router._root, express.text()); break
-          case 'form': app.use(router._root, express.urlencoded()); break
+          case 'raw': { app.use(router._root, express.raw()); break }
+          case 'json': { app.use(router._root, express.json()); break }
+          case 'text': { app.use(router._root, express.text()); break }
+          case 'form': { app.use(router._root, express.urlencoded()); break }
         }
       })
     }

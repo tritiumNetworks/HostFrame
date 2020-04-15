@@ -1,0 +1,3 @@
+[submodule "router/embed"]
+	path = router/embed
+	url = https://github.com/tritiumNetworks/wait-thats-illegal-embed.git
