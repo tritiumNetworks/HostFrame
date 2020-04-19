@@ -3,28 +3,41 @@ let appl
 
 /** @class */
 class Rapp {
-  constructor (root) {
+  constructor (root, host) {
     this.root = root
+    this.host = host
   }
 
   /** @param {reqandres} cb */
   get (path, cb) {
-    appl.get(this.root + path, cb)
+    appl.get(this.root + path, (req, res) => {
+      if (!this.host) return cb(req, res)
+      if (this.host === req.hostname) return cb(req, res)
+    })
   }
 
   /** @param {reqandres} cb */
   put (path, cb) {
-    appl.put(this.root + path, cb)
+    appl.put(this.root + path, (req, res) => {
+      if (!this.host) return cb(req, res)
+      if (this.host === req.hostname) return cb(req, res)
+    })
   }
 
   /** @param {reqandres} cb */
   post (path, cb) {
-    appl.post(this.root + path, cb)
+    appl.post(this.root + path, (req, res) => {
+      if (!this.host) return cb(req, res)
+      if (this.host === req.hostname) return cb(req, res)
+    })
   }
 
   /** @param {reqandres} cb */
   all (path, cb) {
-    appl.all(this.root + path, cb)
+    appl.all(this.root + path, (req, res) => {
+      if (!this.host) return cb(req, res)
+      if (this.host === req.baseUrl) return cb(req, res)
+    })
   }
 }
 

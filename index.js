@@ -43,7 +43,7 @@ readdir(path + '/router', (err, routers) => {
       })
     }
 
-    const rapp = new Rapp(router._root)
+    const rapp = new Rapp(router._root, router._host)
     router.ready(rapp, router._socket ? { ws: socket, wss: ssocket } : undefined)
   })
 })
