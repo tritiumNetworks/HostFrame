@@ -14,11 +14,11 @@ const Rapp = require('./class/Rapp')
 const app = express()
 const ssl = { cert: readFileSync(path + '/cert/trinets-cert.pem'), key: readFileSync(path + '/cert/trinets-key.pem') }
 
-http.createServer(app).listen(port, () => { console.log('Non-SSL Server is now on http://localhost:' + port) })
-https.createServer(ssl, app).listen(sslPort, () => { console.log('SSL Server is now on https://localhost:' + sslPort) })
+const serv = http.createServer(app).listen(port, () => { console.log('Non-SSL Server is now on http://localhost:' + port) })
+const sserv = https.createServer(ssl, app).listen(sslPort, () => { console.log('SSL Server is now on https://localhost:' + sslPort) })
 
-const socket = socketIo(http)
-const ssocket = socketIo(https)
+const socket = socketIo(serv)
+const ssocket = socketIo(sserv)
 
 Rapp.reg(app)
 
