@@ -4,3 +4,9 @@
 [submodule "router/main"]
 	path = router/main
 	url = https://github.com/tritiumNetworks/TritiumNetworks.git
+[submodule "router/chat"]
+	path = router/chat
+	url = https://github.com/tritiumNetworks/triangles.git
+[submodule "router/type"]
+	path = router/type
+	url = https://github.com/tritiumNetworks/typingGame.git
