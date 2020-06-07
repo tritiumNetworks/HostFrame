@@ -1,24 +1,19 @@
 const port = process.env.hostPort || 8080
-const sslPort = process.env.hostSSLPort || 8443
 
 const cors = require('cors')
 const path = require('path').resolve()
 const http = require('http')
-const https = require('https')
 const express = require('express')
 const socketIo = require('socket.io')
-const { readFileSync, readdir, existsSync } = require('fs')
+const { readdir, existsSync } = require('fs')
 
 const Rapp = require('./class/Rapp')
 
 const app = express()
-const ssl = { cert: readFileSync(path + '/cert/trinets-cert.pem'), key: readFileSync(path + '/cert/trinets-key.pem') }
-
-const serv = http.createServer(app).listen(port, () => { console.log('Non-SSL Server is now on http://localhost:' + port) })
-const sserv = https.createServer(ssl, app).listen(sslPort, () => { console.log('SSL Server is now on https://localhost:' + sslPort) })
-
+const serv = http.createServer(app)
 const socket = socketIo(serv)
-const ssocket = socketIo(sserv)
+
+serv.listen(port, () => { console.log('Non-SSL Server is now on http://localhost:' + port) })
 
 Rapp.reg(app)
 
@@ -44,6 +39,6 @@ readdir(path + '/router', (err, routers) => {
     }
 
     const rapp = new Rapp(router._root, router._host)
-    router.ready(rapp, router._socket ? { ws: socket, wss: ssocket } : undefined)
+    router.ready(rapp, router._socket ? socket : undefined)
   })
 })

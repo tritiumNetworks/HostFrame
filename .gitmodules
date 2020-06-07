@@ -10,3 +10,6 @@
 [submodule "router/type"]
 	path = router/type
 	url = https://github.com/tritiumNetworks/typingGame.git
+[submodule "router/arrow"]
+	path = router/arrow
+	url = https://github.com/tritiumNetworks/ArrowLanguage.git
