@@ -42,3 +42,5 @@ readdir(path + '/router', (err, routers) => {
     router.ready(rapp, router._socket ? socket : undefined)
   })
 })
+
+app.use('/', express.static(path + '/public'))

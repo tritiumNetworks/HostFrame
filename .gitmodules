@@ -13,3 +13,6 @@
 [submodule "router/arrow"]
 	path = router/arrow
 	url = https://github.com/tritiumNetworks/ArrowLanguage.git
+[submodule "router/rand"]
+	path = router/rand
+	url = https://github.com/tritiumNetworks/RandRes
