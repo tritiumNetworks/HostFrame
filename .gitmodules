@@ -16,3 +16,6 @@
 [submodule "router/rand"]
 	path = router/rand
 	url = https://github.com/tritiumNetworks/RandRes
+[submodule "public/Sitemap"]
+	path = public/Sitemap
+	url = https://github.com/tritiumNetworks/Sitemap.git
