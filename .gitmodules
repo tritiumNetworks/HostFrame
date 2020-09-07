@@ -19,3 +19,6 @@
 [submodule "public/Sitemap"]
 	path = public/Sitemap
 	url = https://github.com/tritiumNetworks/Sitemap.git
+[submodule "router/momiji"]
+	path = router/momiji
+	url = https://github.com/tritiumNetworks/momijicon
